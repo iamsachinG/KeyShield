@@ -1,115 +1,288 @@
-# Password Security Analyzer
+# 🔐 KeyShield | Password Security Analyzer
 
-A privacy-first React and Node.js educational project for a Web Security & Compliance (WSC) mini-project. It estimates password strength entirely in your browser. The Express API only exposes a health check and never receives password input.
+A privacy-first password security analyzer built with **React, Vite, and Node.js** for a Web Security & Compliance (WSC) educational project.
 
-## Features
+KeyShield estimates password strength entirely in your browser. Your password is never transmitted to the backend, stored in a database, or sent to external password-analysis services.
 
-- Live checklist for length, character classes, repeated characters, common passwords, and predictable sequences.
-- Five-level strength estimate with actionable guidance; Enter and the Analyze button show the same result.
-- Keyboard accessible show/hide and clear controls, visible focus, live announcements, and Escape to dismiss the result without clearing input.
-- Responsive dark interface, privacy notice, and reduced-motion support.
-- Minimal Express health API with Helmet, allowlisted CORS, rate limiting, and centralized error handling.
-- No database, analytics, cookies, browser storage, external password API, or password submission endpoint.
+<p align="center">
+  <strong>Privacy First · Client-Side Analysis · Keyboard Accessible</strong>
+</p>
 
-## Stack
+---
 
-- React 19, Vite, Tailwind CSS, Lucide React
-- Node.js, Express 5, Helmet, CORS, express-rate-limit
-- npm
+## ✨ Features
 
-## Project structure
+* **Live Password Analysis:** Evaluate password length, character diversity, repeated characters, common passwords, and predictable sequences.
+* **Five-Level Strength Meter:** View an estimated strength rating from Very Weak to Very Strong, with actionable recommendations.
+* **Keyboard Friendly:** Press `Enter` to analyze your password. Use keyboard navigation to access interactive controls.
+* **Show/Hide Password:** Toggle password visibility whenever needed.
+* **Responsive Interface:** A modern dark-themed interface designed for desktop, tablet, and mobile devices.
+* **Privacy by Design:** Password analysis runs locally in your browser.
+* **Accessible Feedback:** Visible focus indicators, screen-reader announcements, and support for reduced motion.
+* **Secure Express API:** A minimal health-check endpoint protected with Helmet, CORS allowlisting, and rate limiting.
+
+## 🛡️ Security & Privacy
+
+KeyShield is designed to minimize the exposure of sensitive information.
+
+| Security Measure              | Implementation                                          |
+| ----------------------------- | ------------------------------------------------------- |
+| Client-side password analysis | Passwords are evaluated locally in the browser          |
+| No password storage           | No database, cookies, local storage, or session storage |
+| No password transmission      | The Express API does not receive password input         |
+| HTTP security headers         | Helmet                                                  |
+| CORS protection               | Configurable frontend-origin allowlist                  |
+| Rate limiting                 | Express rate-limit middleware                           |
+| Safe rendering                | React rendering without unsafe HTML injection           |
+| Error handling                | Centralized API error handling                          |
+
+**Important:** KeyShield provides an educational estimate of password strength. It does not guarantee that a password is secure or uncompromised.
+
+## 🧰 Technology Stack
+
+### Frontend
+
+* React 19
+* Vite
+* Tailwind CSS
+* Lucide React
+* JavaScript
+
+### Backend
+
+* Node.js
+* Express 5
+* Helmet
+* CORS
+* express-rate-limit
+
+### Development Tools
+
+* npm
+* Git
+* GitHub
+
+## 📸 Application Overview
+
+KeyShield provides a streamlined interface for entering a password, reviewing its estimated strength, and receiving recommendations to improve it.
+
+The interface includes a password input, strength meter, requirements checklist, and privacy notice.
+
+## 📁 Project Structure
 
 ```text
-password-security-analyzer/
-├── client/                 # React + Vite UI and on-device estimator
-│   └── src/
-│       ├── utils/           # Heuristic and unit tests
-│       ├── App.jsx
-│       └── index.css
-├── server/                 # Health-only Express API
+KeyShield/
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── utils/
+│   │   ├── App.jsx
+│   │   └── index.css
+│   └── package.json
+├── server/
+│   ├── routes/
+│   ├── middleware/
 │   ├── app.js
 │   ├── server.js
+│   ├── package.json
 │   └── .env.example
-├── package.json            # Root scripts
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
-## Requirements
+The exact directory contents may vary slightly depending on the current implementation.
 
-Use Node.js 20.19+ or 22.12+ and npm. Check versions in PowerShell:
+## ⚙️ Requirements
+
+Install the following before running the project:
+
+* Node.js 20.19+ or 22.12+
+* npm
+* Git
+
+Check your installed versions:
 
 ```powershell
 node --version
 npm --version
+git --version
 ```
 
-## Install and run (Windows PowerShell)
+## 🚀 Installation
 
-From the project folder:
+### 1. Clone the Repository
+
+```powershell
+git clone https://github.com/iamsachinG/KeyShield.git
+```
+
+### 2. Enter the Project Directory
+
+```powershell
+cd KeyShield
+```
+
+### 3. Install Dependencies
 
 ```powershell
 npm install
 npm --prefix client install
 npm --prefix server install
+```
+
+### 4. Configure Environment Variables
+
+Copy the example environment file:
+
+```powershell
 Copy-Item server/.env.example server/.env
+```
+
+Adjust the values only when necessary.
+
+### 5. Start the Application
+
+```powershell
 npm run dev
 ```
 
-The UI is at <http://127.0.0.1:5173> and the API health check is <http://127.0.0.1:4000/api/health>. The API binds to loopback by default. Press Ctrl+C to stop both processes.
+If the root development script starts both services, the application should be available at:
 
-To run each service separately, use two PowerShell windows:
+* **Frontend:** `http://127.0.0.1:5173`
+* **Backend Health Check:** `http://127.0.0.1:4000/api/health`
+
+Use `Ctrl + C` to stop the development processes.
+
+### Running Services Separately
+
+Start the backend in one terminal:
 
 ```powershell
 npm --prefix server run dev
 ```
 
+Start the frontend in another terminal:
+
 ```powershell
 npm --prefix client run dev
 ```
 
-## Configuration
+## 🔧 Configuration
 
-Copy `server/.env.example` to `server/.env` and adjust only if needed:
+The backend uses environment variables defined in `server/.env.example`.
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `PORT` | `4000` | Health API port |
-| `NODE_ENV` | `development` | Controls detailed server-side error logging |
-| `CLIENT_ORIGIN` | `http://127.0.0.1:5173` | Single allowed browser origin for CORS |
+| Variable        | Default                 | Purpose                 |
+| --------------- | ----------------------- | ----------------------- |
+| `PORT`          | `4000`                  | Backend port            |
+| `NODE_ENV`      | `development`           | Application environment |
+| `CLIENT_ORIGIN` | `http://127.0.0.1:5173` | Allowed frontend origin |
 
-The server has no password analysis route and intentionally does not install a request body parser.
+The backend exposes a health-check endpoint and does not provide a password-analysis endpoint.
 
-## Build and tests
+**Never commit real secrets or your local `.env` file to GitHub.**
+
+## 🧪 Build & Testing
+
+Run the production build:
 
 ```powershell
 npm run build
+```
+
+Run the available tests:
+
+```powershell
 npm test
 ```
 
-The client tests cover basic strength heuristic behavior. Server tests check the health response/security headers and confirm an unknown analysis route is not available.
+The project tests cover password-strength heuristic behavior, API health responses, security headers, and the absence of an analysis endpoint.
 
-## Security choices and privacy
+## ⌨️ Keyboard Controls
 
-- Password state exists only in the React component's in-memory state while the page is open. Clearing or closing the page removes it; it is never written to local/session storage, cookies, URLs, logs, or a database.
-- The analysis module is local JavaScript. The health API accepts only `GET /api/health`; it does not receive password data.
-- Helmet sets HTTP security headers. CORS permits only the configured frontend origin. Rate limiting applies to API requests. Express hides its framework banner and returns generic 404/500 JSON responses.
-- The API binds to `127.0.0.1` by default for local project use. Configure deployment networking deliberately if hosting it.
-- No third-party analytics or breach lookup is performed. Google Fonts are used for presentation; the password is never included in font requests.
+| Action                        | Expected Behavior                                         |
+| ----------------------------- | --------------------------------------------------------- |
+| `Enter` in the password input | Analyze the password                                      |
+| `Tab`                         | Move between interactive controls                         |
+| Show/Hide button              | Toggle password visibility                                |
+| Clear button                  | Clear the input and analysis state                        |
+| `Escape`                      | Dismiss the analysis result without clearing the password |
 
-## How to interpret the estimate
+The application should preserve normal browser keyboard behavior and provide visible focus indicators.
 
-This is a small educational heuristic. It looks at length, character classes, a short list of common passwords, repeated runs, and obvious sequences. It is not a formal entropy calculation, does not inspect breached-password databases, and cannot guarantee that a password is safe. Prefer a unique, randomly generated password or a long unique passphrase stored in a reputable password manager. Do not reuse a password just because this page rates it highly.
+## 🧠 How Password Analysis Works
 
-## WSC concepts demonstrated
+KeyShield uses a lightweight JavaScript heuristic to estimate password strength.
 
-- Data minimization and privacy by design
-- HTTP security headers, CORS origin allowlisting, and request rate limiting
-- Input handling without unsafe HTML rendering or evaluation
-- Keyboard accessibility and secure handling of sensitive user input
-- Security estimation limitations and avoiding unsupported security claims
+The analyzer considers:
 
-## Possible future improvements
+* Password length
+* Uppercase and lowercase characters
+* Numeric and special characters
+* Common passwords
+* Repeated characters
+* Predictable sequences and patterns
 
-- Replace the small common-password list with a larger locally bundled dataset, without transmitting the entered value.
-- Add optional localization and more assistive-technology usability checks.
-- Add deployment-specific HTTPS and reverse-proxy guidance.
+The application displays a strength category and recommendations based on the analysis.
+
+### Understanding the Limitations
+
+This is an educational estimator, not a formal password-security assessment.
+
+It does not perform a formal entropy calculation, query breached-password databases, or guarantee resistance to every guessing technique.
+
+For better account security:
+
+* Use a unique password for every account.
+* Prefer long, randomly generated passwords or unique passphrases.
+* Use a reputable password manager.
+* Enable multifactor authentication when available.
+* Never reuse a password simply because KeyShield rates it highly.
+
+## 🎓 WSC Concepts Demonstrated
+
+This project demonstrates practical concepts related to Web Security & Compliance:
+
+* Privacy by design and data minimization
+* Authentication security and password-strength policies
+* HTTP security headers
+* CORS configuration
+* API rate limiting
+* Secure handling of user input
+* Accessibility and keyboard navigation
+* Security testing and threat awareness
+* Limitations of heuristic security analysis
+
+## 🔮 Future Improvements
+
+Potential enhancements include:
+
+* A larger locally bundled common-password dataset
+* Improved password predictability analysis
+* Additional accessibility testing
+* More detailed security recommendations
+* Deployment-specific security configuration
+* Expanded unit and integration test coverage
+
+Any future breach-checking feature should preserve the principle that the entered password must not be transmitted to an external service.
+
+## 📄 License
+
+This project is licensed under the **MIT License**. See the [`LICENSE`](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Sachin Gupta**
+
+GitHub: [@iamsachinG](https://github.com/iamsachinG)
+
+Repository: [KeyShield](https://github.com/iamsachinG/KeyShield)
+
+---
+
+<p align="center">
+  Built for learning, security awareness, and Web Security & Compliance.
+</p>
