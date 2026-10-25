@@ -1,0 +1,15 @@
+{
+  "name": "password-security-analyzer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Privacy-first password security analyzer for a WSC mini-project",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:client": "npm --prefix client run dev",
+    "dev:server": "npm --prefix server run dev",
+    "build": "npm --prefix client run build",
+    "test": "npm --prefix client test && npm --prefix server test",
+    "start": "npm --prefix server start"
+  },
+  "devDependencies": { "concurrently": "^9.2.1" }
+}
