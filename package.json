@@ -2,6 +2,7 @@
   "name": "password-security-analyzer",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Privacy-first password security analyzer for a WSC mini-project",
   "scripts": {
     "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:client\"",
